@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-// import { ref, isProxy, toRaw } from "vue";
 import { ref } from "vue";
 import customFetch from "@/utils/axios";
 
@@ -28,9 +27,20 @@ export const allJobsStore = defineStore("allJobs", () => {
 
   const handleChange = ({ name, value }) => {
     page.value = 1;
-    // name.value = value;
-    search.value = value;
-    console.log(name, value);
+    if (name === 'search') {
+      search.value = value
+    }
+    if (name === 'searchType') {
+      searchType.value = value
+    }
+    if (name === 'searchStatus') {
+      searchStatus.value = value
+    }
+    if (name === 'sort') {
+      sort.value = value
+    }
+    console.log(searchType.value, searchStatus.value, sort.value);
+    console.log(typeof name, value);
   };
 
   const clearFilters = () => {
@@ -38,11 +48,9 @@ export const allJobsStore = defineStore("allJobs", () => {
     searchStatus.value = "all";
     searchType.value = "all";
     sort.value = "latest";
-    sortOptions.value = ["latest", "oldest", "a-z", "z-a"];
   };
 
   const changePage = (payload) => {
-    console.log('change page', payload);
     page.value = payload;
   }
 
@@ -57,7 +65,6 @@ export const allJobsStore = defineStore("allJobs", () => {
       isLoading.value = false;
       jobs.value = resp.data.jobs;
       numOfPages.value = resp.data.numOfPages;
-      console.log(resp.data.numOfPages);
       totalJobs.value = resp.data.totalJobs;
     } catch (error) {
       isLoading.value = false;

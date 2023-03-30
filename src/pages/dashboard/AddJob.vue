@@ -36,7 +36,7 @@
           :list="statusOptions"
           @handleChange="handleJobInput"
         /> -->
-        <select name="status" id="status" @change="handleJobInput">
+        <select name="status" id="status" :value="status" @change="handleJobInput">
           <option v-for="(status, index) in statusOptions" :value="status" :key="index">{{ status }}</option>
         </select>
         <!-- <form-row
@@ -86,8 +86,6 @@ const { user } = storeToRefs(storeUser);
 
 onMounted(() => {
   if (!isEditing.value) {
-    console.log(user.value.location);
-    console.log('hello');
     storeJob.handleChange({
       name: "jobLocation",
       value: user.value.location,
@@ -97,12 +95,9 @@ onMounted(() => {
 
 const handleJobInput = (e) => {
   storeJob[e.target.name] = e.target.value;
-  console.log(jobType.value, status.value);
 };
 
 const handleSubmit = (e) => {
-  console.log("submit");
-  console.log(isEditing.value);
   e.preventDefault();
 
   if (!position.value || !company.value || !jobLocation) {

@@ -6,6 +6,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 import AllJobs from "@/pages/dashboard/AllJobs.vue";
 import AdddJob from "@/pages/dashboard/AddJob.vue";
 import Stats from "@/pages/dashboard/Stats.vue";
+import Profile from '@/pages/dashboard/Profile.vue'
 // import Navbar from "@/components/Navbar.vue";
 
 const routes = [
@@ -39,6 +40,11 @@ const routes = [
     name: "Stats",
     component: Stats,
   },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
+  }
   // {
   //   path: "/navbar",
   //   name: "Navbar",

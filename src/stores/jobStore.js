@@ -10,7 +10,7 @@ export const jobStore = defineStore("job", () => {
   const position = ref("");
   const company = ref("");
   const jobLocation = ref("");
-  const jobTypeOptions = ref(["full-time", "part-time", "remote", "intership"]);
+  const jobTypeOptions = ref(["full-time", "part-time", "remote", "internship"]);
   const jobType = ref("full-time");
   const statusOptions = ref(["interview", "declined", "pending"]);
   const status = ref("pending");
