@@ -27,20 +27,8 @@ export const allJobsStore = defineStore("allJobs", () => {
 
   const handleChange = ({ name, value }) => {
     page.value = 1;
-    if (name === 'search') {
-      search.value = value
-    }
-    if (name === 'searchType') {
-      searchType.value = value
-    }
-    if (name === 'searchStatus') {
-      searchStatus.value = value
-    }
-    if (name === 'sort') {
-      sort.value = value
-    }
-    console.log(searchType.value, searchStatus.value, sort.value);
-    console.log(typeof name, value);
+    const storeAlljobs = allJobsStore();
+    storeAlljobs[name] = value;
   };
 
   const clearFilters = () => {
@@ -92,8 +80,6 @@ export const allJobsStore = defineStore("allJobs", () => {
       const resp = await customFetch.get("/jobs/stats");
       monthlyApplications.value = resp.data.monthlyApplications;
       stats.value = resp.data.defaultStats;
-      console.log(resp.data.defaultStats);
-      console.log(resp.data.monthlyApplications);
     } catch (error) {
       console.log(error);
     }

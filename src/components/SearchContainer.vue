@@ -2,7 +2,7 @@
     <section>
         <form action="">
             <h4>search form</h4>
-            <div class="form-center">
+            <div class="form-center"> 
                 <input type="text" name="search" v-model="search" @input="handleSearch">
                 <!-- <input type="text" :value="search"
                     @change="storeAllJobs.handleChange({ name: e.target.name, value: e.target.value })"> -->
@@ -33,8 +33,6 @@ const storeAllJobs = allJobsStore()
 const storeJob = jobStore()
 
 const { isLoading, search, searchStatus, searchType, sort, sortOptions } = storeToRefs(storeAllJobs)
-// const { isLoading, search, sortOptions } = storeToRefs(storeAllJobs)
-// const { search } = storeToRefs(storeAllJobs)
 
 const { jobTypeOptions, statusOptions } = storeToRefs(storeJob)
 

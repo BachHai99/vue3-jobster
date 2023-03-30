@@ -32,9 +32,6 @@ export const userStore = defineStore("user", () => {
   };
 
   const logoutUser = async () => {
-    // try {
-    //   const resp = await customFetch.post("/auth/login");
-    // } catch (error) {}
     user.value = null;
     isSidebarOpen.value = false;
     removeUserFromLocalStorage();
@@ -42,7 +39,6 @@ export const userStore = defineStore("user", () => {
 
   const clearStore = async () => {
     try {
-      console.log('clear store');
       logoutUser();
       storeAllJobs.clearAllJobsState();
       storeJob.clearValues();
@@ -57,7 +53,6 @@ export const userStore = defineStore("user", () => {
       isLoading.value = true;
       const resp = await customFetch.patch('/auth/updateUser', user)
       isLoading.value = false;
-      console.log(resp.data.user);
       user.value = resp.data.user;
       addUserToLocalStorage(user.value);
     } catch (error) {
