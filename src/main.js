@@ -16,6 +16,13 @@ import {
   uniBug,
   uniUserCircle,
   uniAngleDown,
+  uniChartGrowth,
+  uniAnalysis,
+  uniChart,
+  uniUserSquare,
+  uniAlignLeft,
+  uniAngleDoubleLeft,
+  uniAngleDoubleRight
 } from "vue-unicons/dist/icons";
 import createRouter from "@/router/index.js";
 
@@ -30,6 +37,13 @@ Unicon.add([
   uniBug,
   uniUserCircle,
   uniAngleDown,
+  uniChartGrowth,
+  uniAnalysis,
+  uniChart,
+  uniUserSquare,
+  uniAlignLeft,
+  uniAngleDoubleLeft,
+  uniAngleDoubleRight
 ]);
 
 i18n(

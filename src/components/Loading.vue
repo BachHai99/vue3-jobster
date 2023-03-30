@@ -1,11 +1,9 @@
 <template>
-    <h1>loading</h1>
+    <div class="loading-center loading"></div>
 </template>
 
 <script setup>
 
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -33,10 +33,9 @@
             "
             >Edit</router-link
           >
-          {{ props.job._id }}
           <button
             type="button"
-            class="btn- delete-btn"
+            class="btn delete-btn"
             @click="storeJob.deleteJob(props.job._id)"
           >
             Delete

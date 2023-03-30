@@ -2,14 +2,11 @@
   <nav>
     <div class="nav-center">
       <button type="button" class="toggle-btn" @click="store.toggleSidebar">
-        toggle logo
+        <unicon name="align-left" fill="#627D98" width="40px" height="40px"></unicon>
       </button>
       {{ isSidebarOpen ? "open" : "close" }}
-      <!-- {{ user.name }} -->
       <div>
         logo
-        <!-- <h3 class="logo-text">{{$t('dashboard')}}</h3> -->
-        <!-- <h3 class="logo-text">{{$t('login')}}</h3> -->
       </div>
        <div v-if="languages">
         <span v-for="(lng, index) in Object.keys(languages)" :key="index">

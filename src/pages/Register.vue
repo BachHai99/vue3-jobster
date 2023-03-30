@@ -87,20 +87,20 @@ const toggleMember = () => {
 const onSubmit = (e) => {
   e.preventDefault();
   console.log("submit");
-  // const { name, email, password, isMember } = values.value;
-  // // const name = values.value.name;
-  // console.log(name, email, password, isMember);
-  // //   console.log(name, email, password);
-  // if (!email || !password || (!isMember && !name)) {
-  //   // toast.error("Please fill out all fields");
-  //   return;
-  // }
-  // if (isMember) {
-  //   // console.log("run");
-  //   store.loginUser({ email: values.value.email, password: values.value.password });
-  //   return;
-  // }
-  // store.logoutUser();
+  const { name, email, password, isMember } = values.value;
+  // const name = values.value.name;
+  console.log(name, email, password, isMember);
+  //   console.log(name, email, password);
+  if (!email || !password || (!isMember && !name)) {
+    // toast.error("Please fill out all fields");
+    return;
+  }
+  if (isMember) {
+    // console.log("run");
+    store.loginUser({ email: values.value.email, password: values.value.password });
+    return;
+  }
+  store.logoutUser();
 };
 </script>
 

@@ -3,6 +3,7 @@
   <!-- <Register /> -->
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <navbar />
+  <big-sidebar />
   <router-view/>
 </template>
 
@@ -10,7 +11,7 @@
 // import HelloWorld from './components/HelloWorld.vue'
 // import Register from '@/pages/Register.vue'
 import Navbar from '@/components/Navbar.vue';
-
+import BigSidebar from './components/BigSidebar.vue';
 </script>
 
 <style>

@@ -37,8 +37,9 @@ export const jobStore = defineStore("job", () => {
     editJobId.value = "";
   };
 
-  const handleChange = (name, value) => {
-    name.value = value;
+  const handleChange = ({ name, value }) => {
+    console.log(jobLocation.value, value, name);
+    jobLocation.value = value;
   };
 
   const setEditJob = (payload) => {
@@ -53,10 +54,13 @@ export const jobStore = defineStore("job", () => {
   };
 
   const createJob = async (job) => {
+    console.log(job);
     try {
+      console.log(job);
       isLoading.value = true;
       const resp = await customFetch.post("/jobs", job);
       isLoading.value = false;
+      clearValues();
       console.log(resp.data);
     } catch (error) {
       console.log(error);

@@ -26,7 +26,12 @@ export const allJobsStore = defineStore("allJobs", () => {
     isLoading.value = false;
   };
 
-  const handleChange = () => {};
+  const handleChange = ({ name, value }) => {
+    page.value = 1;
+    // name.value = value;
+    search.value = value;
+    console.log(name, value);
+  };
 
   const clearFilters = () => {
     search.value = "";
@@ -35,6 +40,11 @@ export const allJobsStore = defineStore("allJobs", () => {
     sort.value = "latest";
     sortOptions.value = ["latest", "oldest", "a-z", "z-a"];
   };
+
+  const changePage = (payload) => {
+    console.log('change page', payload);
+    page.value = payload;
+  }
 
   const getAllJobs = async () => {
     let url = `/jobs?status=${searchStatus.value}&jobType=${searchType.value}&sort=${sort.value}&page=${page.value}`;
@@ -47,8 +57,8 @@ export const allJobsStore = defineStore("allJobs", () => {
       isLoading.value = false;
       jobs.value = resp.data.jobs;
       numOfPages.value = resp.data.numOfPages;
+      console.log(resp.data.numOfPages);
       totalJobs.value = resp.data.totalJobs;
-      console.log(resp.data);
     } catch (error) {
       isLoading.value = false;
       console.log(error);
@@ -99,6 +109,7 @@ export const allJobsStore = defineStore("allJobs", () => {
     hideLoading,
     clearFilters,
     handleChange,
+    changePage,
     getAllJobs,
     showStats,
     clearAllJobsState,
