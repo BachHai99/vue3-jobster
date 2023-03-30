@@ -4,9 +4,6 @@
             <h4>search form</h4>
             <div class="form-center"> 
                 <input type="text" name="search" v-model="search" @input="handleSearch">
-                <!-- <input type="text" :value="search"
-                    @change="storeAllJobs.handleChange({ name: e.target.name, value: e.target.value })"> -->
-                <!-- <select name="status" id="status"></select> -->
                 <select name="searchStatus" id="searchStatus" :value="searchStatus" @change="handleSearch">
                     <option v-for="(status, index) in statusOptionsData" :key="index" :value="status">{{ status }}</option>
                 </select>

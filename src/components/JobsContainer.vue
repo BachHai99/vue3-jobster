@@ -9,13 +9,6 @@
       <job v-for="(job, index) in jobs" :key="index" :job="job" />
     </div>
     <page-btn-container v-if="numOfPages > 1" />
-    <!-- :_id="job._id"
-        :position="job.position"
-        :company="job.company"
-        :jobLocation="job.jobLocation"
-        :jobType="job.jobType"
-        :createAt="job.createAt"
-        :status="job.status" -->
   </section>
 </template>
 
@@ -36,12 +29,6 @@ onMounted(() => {
 });
 
 watch([sort, page, searchStatus, searchType, search], store.getAllJobs)
-// watch(page, store.getAllJobs)
-// watch(search, setTimeout(() => {
-//   store.getAllJobs
-// }, 3000));
-// watch(searchStatus, store.getAllJobs);
-// watch(searchType, store.getAllJobs);
 </script>
 
 <style lang="scss" scoped>

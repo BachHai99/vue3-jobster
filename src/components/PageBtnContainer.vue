@@ -11,7 +11,6 @@
             next
             <unicon name="angle-double-right" fill="#7482F6" width="40px" height="40px"></unicon>
         </button>
-
     </section>
 </template>
 

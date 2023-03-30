@@ -18,7 +18,6 @@
       <div class="btn-container">
         <button type="button" class="btn" @click="toggleShowLogout">
           <unicon name="user-circle" fill="white" width="22px" class="icon" />
-          <!-- {{ user?.name }} -->
           {{ name }}
           <unicon name="angle-down" fill="white" width="22px"></unicon>
         </button>
