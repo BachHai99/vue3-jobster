@@ -1,7 +1,7 @@
 <template>
     <section>
         <form action="">
-            <h4>search form</h4>
+            <h4>{{ $t('searchForm') }}</h4>
             <div class="form-center"> 
                 <input type="text" name="search" v-model="search" @input="handleSearch">
                 <select name="searchStatus" id="searchStatus" :value="searchStatus" @change="handleSearch">
@@ -15,7 +15,7 @@
                     <option v-for="(sort, index) in sortOptions" :key="index" :value="jobType">{{ sort }}
                     </option>
                 </select>
-                <button class="btn btn-block btn-danger" :disabled="isLoading" @click="handleSubmit">clear filters</button>
+                <button class="btn btn-block btn-danger" :disabled="isLoading" @click="handleSubmit">{{ $t("clearBtn") }}</button>
             </div>
         </form>
     </section>

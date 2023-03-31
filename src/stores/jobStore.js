@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import customFetch from "@/utils/axios";
 import { getUserFromLocalStorage } from "@/utils/localStorage";
-// import { getAllJobs, hideLoading } from './allJobsStore.js'
 import { allJobsStore } from "@/stores/allJobsStore";
 
 export const jobStore = defineStore("job", () => {
@@ -24,14 +23,7 @@ export const jobStore = defineStore("job", () => {
     position.value = "";
     company.value = "";
     jobLocation.value = getUserFromLocalStorage()?.location || "";
-    // jobTypeOptions.value = [
-    //   "full-time",
-    //   "part-time",
-    //   "remote",
-    //   "intership",
-    // ];
     jobType.value = "full-time";
-    // statusOptions.value = ["interview", "declined", "pending"];
     status.value = "pending";
     isEditing.value = false;
     editJobId.value = "";
@@ -54,14 +46,11 @@ export const jobStore = defineStore("job", () => {
   };
 
   const createJob = async (job) => {
-    console.log(job);
     try {
-      console.log(job);
       isLoading.value = true;
-      const resp = await customFetch.post("/jobs", job);
+      await customFetch.post("/jobs", job);
       isLoading.value = false;
       clearValues();
-      console.log(resp.data);
     } catch (error) {
       console.log(error);
       isLoading.value = false;
@@ -70,11 +59,8 @@ export const jobStore = defineStore("job", () => {
 
   const deleteJob = async (jobId) => {
     try {
-      console.log("call");
-      const resp = await customFetch.delete(`/jobs/${jobId}`);
-      console.log("delete");
+      await customFetch.delete(`/jobs/${jobId}`);
       storeAllJobs.getAllJobs();
-      console.log(resp.data.msg);
     } catch (error) {
       storeAllJobs.hideLoading();
       console.log(error);
@@ -84,9 +70,8 @@ export const jobStore = defineStore("job", () => {
   const editJob = async ({ jobId, job }) => {
     try {
       isLoading.value = true;
-      const resp = await customFetch.patch(`/jobs/${jobId}`, job);
+      await customFetch.patch(`/jobs/${jobId}`, job);
       isLoading.value = false;
-      console.log(resp);
       clearValues();
     } catch (error) {
       console.log(error);

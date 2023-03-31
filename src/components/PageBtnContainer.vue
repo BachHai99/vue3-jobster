@@ -2,13 +2,13 @@
     <section>
         <button type="button" class="prev-btn" @click="prevPage">
             <unicon name="angle-double-left" fill="#7482F6" width="40px" height="40px"></unicon>
-            prev
+            {{ $t("prevBtn") }}
         </button>
         <button type="button" v-for="(pageNumber, index) in pages" :key="index"
             :class="[pageNumber === page ? 'pageBtn active' : 'pageBtn']" @click="store.changePage(pageNumber)">{{
                 pageNumber }}</button>
         <button type="button" class="next-btn" @click="nextPage">
-            next
+            {{ $t("nextBtn") }}
             <unicon name="angle-double-right" fill="#7482F6" width="40px" height="40px"></unicon>
         </button>
     </section>

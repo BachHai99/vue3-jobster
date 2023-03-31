@@ -1,22 +1,23 @@
 <template>
     <section>
         <form action="submit" class="form" @submit="handleSubmit">
-            <h3>profile</h3>
+            <h3>{{$t('profile')}}</h3>
             <div class="form-center">
                 <input type="text" name="name" v-model="name">
                 <input type="text" name="email" v-model="email">
                 <input type="text" name="lastName" v-model="lastName">
                 <input type="text" name="location" v-model="location">
-                <button type="submit" class="btn btn-block" :disabled="isLoading">{{ isLoading ? 'Please wait...' : 'save changes' }}</button>
+                <button type="submit" class="btn btn-block" :disabled="isLoading">{{ isLoading ? $t('pleaseWaitBtn') :  $t('saveChangesBtn') }}</button>
             </div>
         </form>
     </section>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { userStore } from '@/stores/userStore';
+import { getUserFromLocalStorage } from '@/utils/localStorage';
 
 const storeUsers = userStore();
 const { isLoading, user } = storeToRefs(storeUsers)
@@ -34,6 +35,8 @@ const handleSubmit = (e) => {
     }
     storeUsers.updateUser({name: name.value, email: email.value, lastName: lastName.value, location: location.value})
 }
+
+watch(getUserFromLocalStorage, console.log('user changed'))
 
 </script>
 

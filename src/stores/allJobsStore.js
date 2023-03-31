@@ -51,6 +51,7 @@ export const allJobsStore = defineStore("allJobs", () => {
       isLoading.value = true;
       const resp = await customFetch.get(url);
       isLoading.value = false;
+      page.value = 1;
       jobs.value = resp.data.jobs;
       numOfPages.value = resp.data.numOfPages;
       totalJobs.value = resp.data.totalJobs;

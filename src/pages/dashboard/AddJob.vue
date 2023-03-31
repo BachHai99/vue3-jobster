@@ -45,11 +45,11 @@
           :list="jobTypeOptions"
           @handleChange="handleJobInput"
         /> -->
-        <select name="jobType" id="jobType" @change="handleJobInput">
-          <option v-for="(jobType, index) in jobTypeOptions" :value="jobType" :key="index">{{ jobType }}</option>
+        <select name="jobType" id="jobType" :value="jobType" @change="handleJobInput">
+          <option v-for="(jobType, index) in jobTypeOptions" :key="index">{{ jobType }}</option>
         </select>
         <div class="btn-container">
-          <button type="button" class="btn btn-block clear-btn" @click="storeJob.clearValues">
+          <button type="button" class="btn btn-block clear-btn" @click="storeJob.clearValues()">
             clear
           </button>
           <button type="button" class="btn btn-block submit-btn" @click="handleSubmit" :disabled="isLoading">

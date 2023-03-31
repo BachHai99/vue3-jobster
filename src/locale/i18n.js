@@ -50,9 +50,19 @@ i18next
           jobType: "Job Type",
           clearBtn: "Clear",
           submitBtn: "Submit", 
+          editBtn: "Edit",
+          deleteBtn: 'Delete',
 
           // profile
           saveChangesBtn: "Save Changes",
+          pleaseWaitBtn: 'Pleease wait...',
+
+          // all-jobs
+          jobFound: 'job found',
+
+           // page btn
+           prevBtn: 'prev',
+           nextBtn: 'next'
         },
       },
       vn: {
@@ -92,9 +102,19 @@ i18next
           jobType: "Loại công việc",
           clearBtn: "Làm mới",
           submitBtn: "Gửi đi",
+          editBtn: "Sửa",
+          deleteBtn: 'Xóa',
 
           // profile
           saveChangesBtn: "Lưu thay đổi",
+          pleaseWaitBtn: 'Vui lòng chờ...',
+
+          // all-jobs
+          jobFound: 'công việc được tìm thấy',
+
+          // page btn
+          prevBtn: 'Trước đó',
+          nextBtn: 'Kế tiếp'
         },
       },
     },

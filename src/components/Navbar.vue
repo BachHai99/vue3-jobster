@@ -18,7 +18,7 @@
       <div class="btn-container">
         <button type="button" class="btn" @click="toggleShowLogout">
           <unicon name="user-circle" fill="white" width="22px" class="icon" />
-          {{ name }}
+          {{ user?.name }}
           <unicon name="angle-down" fill="white" width="22px"></unicon>
         </button>
         <div :class="[showLogout ? 'dropdown show-dropdown' : 'dropdown']">
@@ -31,15 +31,15 @@
 
 <script setup>
 import { storeToRefs } from "pinia";
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { userStore } from "@/stores/userStore";
 
 const store = userStore();
 const { user } = storeToRefs(store);
 
-const name = ref('')
+// const name = ref('')
 
-watch(user.value.name, name.value = user.value.name);
+// watch(user.value?.name, name.value = user.value.name);
 
 const languages = ref({
   en: {

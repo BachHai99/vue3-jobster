@@ -5,6 +5,7 @@
                 <unicon :name="link.icon" fill="#627D98" width="30px" height="30px"></unicon>
             </span>{{ link.text }}</router-link>
     </div>
+    <!-- {{$t('welcome')}} -->
 </template>
 
 <script setup>
