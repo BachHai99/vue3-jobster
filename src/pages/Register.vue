@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { reactive, watch } from "vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 // import { toast } from "vue3-toastify";
@@ -56,7 +56,7 @@ const router = useRouter();
 
 // const { loginUser, logoutUser } = store;
 
-const values = ref({
+const values = reactive({
   name: "",
   email: "",
   password: "",
