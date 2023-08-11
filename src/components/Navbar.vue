@@ -2,13 +2,13 @@
   <nav>
     <div class="nav-center">
       <button type="button" class="toggle-btn" @click="store.toggleSidebar">
-        <unicon name="align-left" fill="#627D98" width="40px" height="40px"></unicon>
+        <unicon name="align-left" fill="#3b82f6" width="35px" height="35px"></unicon>
       </button>
       <div>
-        logo
+        <h3 className='logo-text'>dashboard</h3>
       </div>
       <div v-if="languages">
-        <span v-for="(lng, index) in Object.keys(languages)" :key="index">
+        <span style="margin-left: 1rem; cursor: pointer;" v-for="(lng, index) in Object.keys(languages)" :key="index">
           <a v-if="$i18next.resolvedLanguage !== lng" @click="$i18next.changeLanguage(lng)">{{ languages[lng].nativeName
           }}</a>
           <strong v-if="$i18next.resolvedLanguage === lng" @click="$i18next.changeLanguage(lng)">{{
@@ -21,7 +21,7 @@
           {{ user?.name }}
           <unicon name="angle-down" fill="white" width="22px"></unicon>
         </button>
-        <div :class="[showLogout ? 'dropdown show-dropdown' : 'dropdown']">
+        <div style="margin-top: 0.5rem;" :class="[showLogout ? 'dropdown show-dropdown' : 'dropdown']">
           <button class="dropdown-btn" type="btn" @click="store.clearStore">logout</button>
         </div>
       </div>
@@ -31,15 +31,13 @@
 
 <script setup>
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { useRouter } from "vue-router";
 import { userStore } from "@/stores/userStore";
 
 const store = userStore();
+const router = useRouter();
 const { user } = storeToRefs(store);
-
-// const name = ref('')
-
-// watch(user.value?.name, name.value = user.value.name);
 
 const languages = ref({
   en: {
@@ -54,6 +52,15 @@ const showLogout = ref(false);
 const toggleShowLogout = () => {
   showLogout.value = !showLogout.value;
 };
+
+watch(user, () => {
+  if (!user.value) {
+    // setTimeout(() => {
+    router.push({ path: "/landing" });
+    console.log('change route');
+    // }, 1000);
+  }
+});
 </script>
 
 <style lang="scss" scoped>

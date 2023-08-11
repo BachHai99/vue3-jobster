@@ -1,27 +1,35 @@
 <template>
-  <div name="form-row">
-    <label :htmlFor="props.name" name="form-label">
-      <!-- {{ labelText }} -->
+  <div class="form-row">
+    <label :htmlFor="props.name" class="form-label">
+      {{ labelText || name }}
     </label>
-    {{ props.type }} - {{ props.name }} - {{ props.value }}
-    <input
-      :id="props.name"
-      :type="props.type"
-      :name="props.name"
-      :value="props.value"
-      class="form-input"
-    />
+    <input :id="props.name" :type="props.type" :name="props.name" :value="props.modelValue" class="form-input"
+      v-on:input="handleChange($event.target.value)" />
   </div>
 </template>
 
 <script setup>
-import { defineProps } from "vue";
-const props = defineProps(["type", "name", "value"]);
-// const emit = defineEmits(["handleChange"]);
+import { defineProps, defineEmits } from "vue";
+const props = defineProps(["type", "name", "labelText", "modelValue"]);
+const emit = defineEmits(["update:modelValue"]);
 
-// const handleChangeInput = (e) => {
-//   // emit('handleChange', e);
-// }
+const handleChange = (val) => {
+  emit('update:modelValue', val);
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.form-label {
+  display: block;
+  font-size: var(--smallText);
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+  text-align: left;
+  letter-spacing: var(--letterSpacing);
+}
+
+.form-row {
+  margin-bottom: 1rem;
+}
+
+</style>

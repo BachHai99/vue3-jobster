@@ -27,7 +27,7 @@
               jobType: props.job.jobType,
               status: props.job.status,
             })
-          ">Edit</router-link>
+            ">Edit</router-link>
           <button type="button" class="btn delete-btn" @click="storeJob.deleteJob(props.job._id)">
             Delete
           </button>
@@ -47,7 +47,7 @@ const props = defineProps(["job"]);
 
 const storeJob = jobStore();
 
-const date = moment(props.createdAt).format("MMM Do, YYYY");
+const date = moment(props.job.createdAt).format("MMM Do, YYYY");
 </script>
 
 <style lang="scss" scoped>
@@ -69,6 +69,7 @@ header {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
+  text-align: left;
 
   h5 {
     letter-spacing: 0;
@@ -89,17 +90,15 @@ header {
   margin-right: 2rem;
 }
 
-.info {
-  h5 {
-    margin-bottom: 0.25rem;
-  }
+.info h5 {
+  margin-bottom: 0.25rem;
+}
 
-  p {
-    margin: 0;
-    text-transform: capitalize;
-    color: var(--grey-400);
-    letter-spacing: var(--letterSpacing);
-  }
+.info p {
+  margin: 0;
+  text-transform: capitalize;
+  color: var(--grey-400);
+  letter-spacing: var(--letterSpacing);
 }
 
 .pending {
@@ -170,6 +169,7 @@ footer {
   color: var(--red-dark);
   background: var(--red-light);
 }
+
 .actions {
   float: left;
 }

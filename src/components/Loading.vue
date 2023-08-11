@@ -1,5 +1,5 @@
 <template>
-    <div class="loading-center loading"></div>
+    <div style="margin-top: 5rem;" class="loading-center loading"></div>
 </template>
 
 <script setup>

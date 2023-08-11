@@ -1,13 +1,14 @@
 <template>
-  <article>
+  <article :style="{borderBottom: '5px solid' + props.stat.color}">
     <header>
-      <span class="count">{{ props.stat.count }}</span>
-      <span class="icon"
+      <span class="count" :style="{color: props.stat.color}">{{ props.stat.count }}</span>
+      <span class="icon" :style="{backgroundColor: props.stat.bcg, borderRadius: '5px'}"
         ><unicon
           :name="props.stat.icon"
           :fill="props.stat.color"
-          width="50px"
-          height="50px"
+          width="35px"
+          height="35px"
+          :backgroundColor="props.stat.bcg"
           class="icon"
       /></span>
     </header>
@@ -26,7 +27,6 @@ article {
   padding: 2rem;
   background: var(--white);
   border-radius: var(--borderRadius);
-  //   border-bottom: 5px solid ${(props) => props.color};
 }
 
 header {

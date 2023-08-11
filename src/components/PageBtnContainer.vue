@@ -1,15 +1,15 @@
 <template>
     <section>
         <button type="button" class="prev-btn" @click="prevPage">
-            <unicon name="angle-double-left" fill="#7482F6" width="40px" height="40px"></unicon>
+            <unicon name="angle-double-left" fill="#3b81f6" width="40px" height="40px"></unicon>
             {{ $t("prevBtn") }}
         </button>
-        <button type="button" v-for="(pageNumber, index) in pages" :key="index"
+        <button type="button" v-for="(pageNumber, idx) in pages" :key="idx"
             :class="[pageNumber === page ? 'pageBtn active' : 'pageBtn']" @click="store.changePage(pageNumber)">{{
                 pageNumber }}</button>
         <button type="button" class="next-btn" @click="nextPage">
             {{ $t("nextBtn") }}
-            <unicon name="angle-double-right" fill="#7482F6" width="40px" height="40px"></unicon>
+            <unicon class="next-icon" name="angle-double-right" fill="#3b81f6" width="40px" height="40px"></unicon>
         </button>
     </section>
 </template>
@@ -39,7 +39,6 @@ const prevPage = () => {
     }
     store.changePage(newPage)
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -59,7 +58,7 @@ section {
 }
 
 .pageBtn {
-    background: transparent;
+    background: #DBE9FE;
     border-color: transparent;
     width: 50px;
     height: 40px;
@@ -99,4 +98,6 @@ section {
     background: var(--primary-500);
     color: var(--white);
 }
+
+
 </style>

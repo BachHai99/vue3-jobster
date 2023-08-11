@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { toast } from "vue3-toastify";
 import customFetch from "@/utils/axios";
 import {
   getUserFromLocalStorage,
@@ -11,7 +12,7 @@ import { jobStore } from "./jobStore";
 
 export const userStore = defineStore("user", () => {
   const isLoading = ref(false);
-  const isSidebarOpen = ref(false);
+  const isSidebarOpen = ref(true);
   const user = ref(getUserFromLocalStorage());
 
   const storeAllJobs = allJobsStore();
@@ -26,10 +27,22 @@ export const userStore = defineStore("user", () => {
       const resp = await customFetch.post("/auth/login", payload);
       user.value = resp.data.user;
       addUserToLocalStorage(resp.data.user);
+
+      toast.success(`welcome back ${user.value.name}`)
     } catch (error) {
       console.log("error");
     }
   };
+
+  const registerUser = async (payload) => {
+    try {
+      const resp = await customFetch.post("/auth/register", payload);
+
+      return resp.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const logoutUser = async () => {
     user.value = null;
@@ -66,6 +79,7 @@ export const userStore = defineStore("user", () => {
     user,
     toggleSidebar,
     loginUser,
+    registerUser,
     logoutUser,
     clearStore,
     updateUser

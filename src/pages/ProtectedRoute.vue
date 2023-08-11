@@ -1,6 +1,5 @@
 <template>
     <router-link to="/landing" v-if="!user"></router-link>
-
 </template>
 
 <script setup>

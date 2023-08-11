@@ -19,9 +19,9 @@ const { stats } = storeToRefs(store);
 const defaultStats = [
   {
     title: "pending applications",
-    // title: '',
     count: stats.value?.pending || 0,
     icon: "briefcase-alt",
+    color: '#e9b949',
     bcg: "#fcefc7",
   },
   {
@@ -66,7 +66,6 @@ const defaultStats = [
 //   ];
 // });
 
-console.log(defaultStats.value);
 </script>
 
 <style lang="scss" scoped>

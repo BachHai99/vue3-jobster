@@ -3,10 +3,10 @@
         <form action="submit" class="form" @submit="handleSubmit">
             <h3>{{$t('profile')}}</h3>
             <div class="form-center">
-                <input type="text" name="name" v-model="name">
-                <input type="text" name="email" v-model="email">
-                <input type="text" name="lastName" v-model="lastName">
-                <input type="text" name="location" v-model="location">
+                <form-row type="text" name="firstName" labelText="first name" v-model="userData.name" />
+                <form-row type="text" name="lastName" labelText="last name" v-model="userData.lastName" />
+                <form-row type="text" name="email" v-model="userData.email" />
+                <form-row type="text" name="location" v-model="userData.location" />
                 <button type="submit" class="btn btn-block" :disabled="isLoading">{{ isLoading ? $t('pleaseWaitBtn') :  $t('saveChangesBtn') }}</button>
             </div>
         </form>
@@ -14,29 +14,35 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { reactive, watch } from 'vue';
 import { storeToRefs } from 'pinia';
+import { toast } from 'vue3-toastify';
 import { userStore } from '@/stores/userStore';
 import { getUserFromLocalStorage } from '@/utils/localStorage';
+import FormRow from '@/components/FormRow.vue';
 
 const storeUsers = userStore();
 const { isLoading, user } = storeToRefs(storeUsers)
 
-const name = ref(user.value?.name || '');
-const email = ref(user.value?.email || '');
-const lastName = ref(user.value?.lastName || '');
-const location = ref(user.value?.location || '');
+const userData = reactive({
+    name: user?.value.name || '',
+    lastName: user?.value.lastName || '',
+    email: user?.value.email || '',
+    location: user?.value.location
+})
 
 const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name.value || !email.value || !lastName.value || !location.value) {
-        console.log('please fill out all..');
+    const { name, lastName, email, location } = userData;
+    if (!name || !lastName || !email || !location) {
+        toast.error('please fill out all fields')
         return
     }
-    storeUsers.updateUser({name: name.value, email: email.value, lastName: lastName.value, location: location.value})
+    storeUsers.updateUser(userData)
+    toast.success('updated success!');
 }
 
-watch(getUserFromLocalStorage, console.log('user changed'))
+watch(getUserFromLocalStorage, console.log('user changed'));
 
 </script>
 

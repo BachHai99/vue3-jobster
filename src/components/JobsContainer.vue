@@ -4,7 +4,7 @@
     <h2>No jobs to display...</h2>
   </section>
   <section v-else>
-    <h5>{{ totalJobs }} {{ $t('jobFound') }}</h5>
+    <h5 style="text-align: left;">{{ totalJobs }} {{ $t('jobFound') }}</h5>
     <div class="jobs">
       <job v-for="(job, index) in jobs" :key="index" :job="job" />
     </div>

@@ -2,52 +2,40 @@
   <section>
     <form action="submit" class="form">
       <h3>{{ isEditing ? "edit job" : "add job" }}</h3>
-      <!-- <input type="text" name="position" :value="position"> -->
-      <!-- <input type="text" name="company" :value="company"> -->
-      <!-- <input type="text" name="jobLocation" :value="jobLocation"> -->
       <div class="form-center">
-        <!-- <form-row
+        <!-- position -->
+        <form-row
           type="text"
           name="position"
-          :value="position"
-          @handleChange="handleJobInput"
-        /> -->
-        <input type="text" name="position" placeholder="Position" v-model="position" />
-        <!-- {{ position }}
-        {{ company }}
-        {{ jobLocation }} -->
-        <!-- <form-row
+          v-model="position"
+        />
+        <!-- company -->
+        <form-row
           type="text"
           name="company"
-          :value="company"
-          @handleChange="handleJobInput"
-        /> -->
-        <input type="text" name="company" placeholder="Company" v-model="company" />
-        <!-- <form-row
+          v-model="company"
+        />
+        <!-- job-location -->
+        <form-row
           type="text"
-          name="JobLocation"
-          :value="JobLocation"
-          @handleChange="handleJobInput"
-        /> -->
-        <input type="text" name="jobLocation" v-model="jobLocation" />
-        <!-- <form-row
+          name="jobLocation"
+          labelText='job location'
+          v-model="jobLocation"
+        />
+        <!-- status -->
+        <form-row-select
           name="status"
-          :value="status"
+          v-model="status"
           :list="statusOptions"
-          @handleChange="handleJobInput"
-        /> -->
-        <select name="status" id="status" :value="status" @change="handleJobInput">
-          <option v-for="(status, index) in statusOptions" :value="status" :key="index">{{ status }}</option>
-        </select>
-        <!-- <form-row
-          name="position"
-          :value="jobType"
+        />
+        <!-- job-type -->
+        <form-row-select
+          name="jobType"
+          labelText='job type'
+          v-model="jobType"
           :list="jobTypeOptions"
-          @handleChange="handleJobInput"
-        /> -->
-        <select name="jobType" id="jobType" :value="jobType" @change="handleJobInput">
-          <option v-for="(jobType, index) in jobTypeOptions" :key="index">{{ jobType }}</option>
-        </select>
+        />
+       
         <div class="btn-container">
           <button type="button" class="btn btn-block clear-btn" @click="storeJob.clearValues()">
             clear
@@ -66,7 +54,9 @@ import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { jobStore } from "@/stores/jobStore";
 import { userStore } from "@/stores/userStore";
-// import FormRow from "@/components/FormRow.vue";
+import FormRow from "@/components/FormRow.vue";
+import FormRowSelect from "@/components/FormRowSelect.vue";
+import { toast } from "vue3-toastify";
 
 const storeJob = jobStore();
 const storeUser = userStore();
@@ -93,14 +83,10 @@ onMounted(() => {
   }
 });
 
-const handleJobInput = (e) => {
-  storeJob[e.target.name] = e.target.value;
-};
-
 const handleSubmit = (e) => {
   e.preventDefault();
 
-  if (!position.value || !company.value || !jobLocation) {
+  if (!position.value || !company.value || !jobLocation) { 
     console.log("err");
   }
   if (isEditing.value) {
@@ -108,11 +94,13 @@ const handleSubmit = (e) => {
       jobId: editJobId.value,
       job: { position: position.value, company: company.value, jobLocation: jobLocation.value, jobType: jobType.value, status: status.value },
     });
+    toast.success("Edit job success!")
     return;
   }
   storeJob.createJob({
     position: position.value, company: company.value, jobLocation: jobLocation.value, jobType: jobType.value, status: status.value
   })
+  toast.success("Create job success!")
 };
 </script>
 

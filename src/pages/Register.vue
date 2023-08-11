@@ -3,33 +3,30 @@
     <form action="submit" class="form" @submit="onSubmit">
       <logo />
       <h3>{{ values.isMember ? "login" : "register" }}</h3>
-     
-      <!-- <h1>{{$t('welcome')}}</h1> -->
       <!-- name field -->
-      <!-- <form-row
+      <form-row
         v-if="!values.isMember"
         type="text"
         name="name"
-        :value="values.name"
-      ></form-row> -->
-      <input v-if="!values.isMember" type="text" v-model="values.name" />
-      <!-- {{values.value.name}} -->
-      <!-- email field -->
-      <!-- <form-row type="email" name="email" :value="values.email" :handleChange="handleChange"></form-row> -->
-      <!-- {{ values.email }} -->
-      <input type="text" v-model="values.email" />
+        v-model="values.name"
+      />
+      <!-- emaill field -->
+      <form-row
+        type="email"
+        name="email"
+        v-model="values.email"
+      />
       <!-- password field -->
-      <!-- <form-row
+      <form-row
         type="password"
         name="password"
-        :value="values.password"
-        :handleChange = "handleChange"
-      ></form-row> -->
-      <input type="password" v-model="values.password" />
+        v-model="values.password"
+      />
       <button class="btn btn-block">
         {{ isLoading ? "loading..." : "submit" }}
       </button>
-      <button class="btn btn-block btn-hipster" :disabled="isLoading" @click="store.loginUser({email: 'testUser@test.com', password: 'secret'})" >
+      <button class="btn btn-block btn-hipster" :disabled="isLoading"
+        @click="store.loginUser({ email: 'testUser@test.com', password: 'secret' })">
         {{ isLoading ? "loading..." : "demo app" }}
       </button>
       <p>{{ values.isMember ? "Not a member yet?" : "Already a member?" }}</p>
@@ -41,11 +38,11 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { reactive, watch } from "vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
-// import { toast } from "vue3-toastify";
-// import FormRow from "@/components/FormRow.vue";
+import { toast } from "vue3-toastify";
+import FormRow from "@/components/FormRow.vue";
 import Logo from "@/components/Logo.vue";
 import { userStore } from "@/stores/userStore";
 
@@ -56,14 +53,12 @@ const router = useRouter();
 
 // const { loginUser, logoutUser } = store;
 
-const values = ref({
+const values = reactive({
   name: "",
   email: "",
   password: "",
   isMember: true,
 });
-
-
 
 watch(user, () => {
   if (user) {
@@ -74,33 +69,22 @@ watch(user, () => {
 });
 
 const toggleMember = () => {
-  values.value.isMember = !values.value.isMember;
+  values.isMember = !values.isMember;
 };
-
-// const handleChange = (e) => {
-//   // const { name, value } = e.target;
-//   // values.value[name] = value
-//   // console.log(values.value.email);
-//   console.log(e);
-// };
 
 const onSubmit = (e) => {
   e.preventDefault();
-  console.log("submit");
-  const { name, email, password, isMember } = values.value;
-  // const name = values.value.name;
-  console.log(name, email, password, isMember);
-  //   console.log(name, email, password);
+  const { name, email, password, isMember } = values;
   if (!email || !password || (!isMember && !name)) {
-    // toast.error("Please fill out all fields");
+    toast.warning("Please fill out all fields");
     return;
   }
   if (isMember) {
-    // console.log("run");
-    store.loginUser({ email: values.value.email, password: values.value.password });
+    store.loginUser({ email: email, password: password });
     return;
   }
-  store.logoutUser();
+  store.registerUser({ name: name, email: email, password: password });
+  toast.success('Created account success!')
 };
 </script>
 
@@ -109,11 +93,13 @@ section {
   display: grid;
   align-items: center;
 }
+
 .logo {
   display: block;
   margin: 0 auto;
   margin-bottom: 1.38rem;
 }
+
 .form {
   max-width: 400px;
   border-top: 5px solid var(--primary-500);
@@ -122,19 +108,21 @@ section {
 h3 {
   text-align: center;
 }
+
 p {
   margin: 0;
   margin-top: 1rem;
   text-align: center;
 }
+
 .btn {
   margin-top: 1rem;
 }
+
 .member-btn {
   background: transparent;
   border: transparent;
   color: var(--primary-500);
   cursor: pointer;
   letter-spacing: var(--letterSpacing);
-}
-</style>
+}</style>

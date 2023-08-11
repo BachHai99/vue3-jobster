@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-    <span class="icon"
-      ><unicon :name="props.icon" fill="grey" width="22px" class="icon"
-    /></span>
+    <!-- <span class="icon"> -->
+    <unicon :name="props.icon" fill="grey" width="22px" class="icon" style="margin-right: 1rem;" />
+    <!-- </span> -->
     <div class="text">{{ props.text }}</div>
   </div>
 </template>
@@ -19,17 +19,19 @@ const props = defineProps(["icon", "text"]);
   display: flex;
   align-items: center;
 }
+
 .icon {
   font-size: 1rem;
-  margin-right: 1rem;
+  // margin-right: 1rem;
   display: flex;
   align-items: center;
+
   svg {
     color: var(--grey-400);
   }
 }
+
 .text {
   text-transform: capitalize;
   letter-spacing: var(--letterSpacing);
-}
-</style>
+}</style>

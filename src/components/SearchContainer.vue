@@ -1,20 +1,16 @@
 <template>
     <section>
         <form action="">
-            <h4>{{ $t('searchForm') }}</h4>
+            <h4 style="text-align: left;">{{ $t('searchForm') }}</h4>
             <div class="form-center"> 
-                <input type="text" name="search" v-model="search" @input="handleSearch">
-                <select name="searchStatus" id="searchStatus" :value="searchStatus" @change="handleSearch">
-                    <option v-for="(status, index) in statusOptionsData" :key="index" :value="status">{{ status }}</option>
-                </select>
-                <select name="searchType" id="searchType" :value="searchType" @change="handleSearch">
-                    <option v-for="(jobType, index) in jobTypeOptionsData" :key="index" :value="jobType">{{ jobType }}
-                    </option>
-                </select>
-                <select name="sort" id="sort" :value="sort" @change="handleSearch">
-                    <option v-for="(sort, index) in sortOptions" :key="index" :value="jobType">{{ sort }}
-                    </option>
-                </select>
+                <!-- search -->
+                <form-row type="text" name="search" v-model="search" />
+                <!-- search status -->
+                <form-row-select name="searchStatus" labelText="search status" v-model="searchStatus" :list="statusOptionsData"  />
+                <!-- search type -->
+                <form-row-select name="searchType" labelText="search type" v-model="searchType" :list="typeOptionsData" />
+                <!-- search sort -->
+                <form-row-select name="sort" v-model="sort" :list="sortOptions" />
                 <button class="btn btn-block btn-danger" :disabled="isLoading" @click="handleSubmit">{{ $t("clearBtn") }}</button>
             </div>
         </form>
@@ -22,9 +18,12 @@
 </template>
 
 <script setup>
+import { watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { jobStore } from '@/stores/jobStore';
 import { allJobsStore } from '@/stores/allJobsStore';
+import FormRow from './FormRow.vue';
+import FormRowSelect from './FormRowSelect.vue';
 
 const storeAllJobs = allJobsStore()
 const storeJob = jobStore()
@@ -33,13 +32,12 @@ const { isLoading, search, searchStatus, searchType, sort, sortOptions } = store
 
 const { jobTypeOptions, statusOptions } = storeToRefs(storeJob)
 
-const jobTypeOptionsData = ['all', ...jobTypeOptions.value]
+const typeOptionsData = ['all', ...jobTypeOptions.value]
 const statusOptionsData = ['all', ...statusOptions.value]
 
-const handleSearch = (e) => {
-    if (isLoading.value) return;
-    storeAllJobs.handleChange({ name: e.target.name, value: e.target.value });
-}
+watch([search.value, sort.value, searchStatus.value, searchType.value], () => {
+    storeAllJobs.getAllJobs();
+})
 
 const handleSubmit = (e) => {
     e.preventDefault();

@@ -36,7 +36,6 @@ export const jobStore = defineStore("job", () => {
 
   const setEditJob = (payload) => {
     isEditing.value = true;
-    console.log(payload);
     company.value = payload.company;
     editJobId.value = payload.editJobId;
     jobLocation.value = payload.jobLocation;
@@ -52,7 +51,6 @@ export const jobStore = defineStore("job", () => {
       isLoading.value = false;
       clearValues();
     } catch (error) {
-      console.log(error);
       isLoading.value = false;
     }
   };
@@ -63,7 +61,6 @@ export const jobStore = defineStore("job", () => {
       storeAllJobs.getAllJobs();
     } catch (error) {
       storeAllJobs.hideLoading();
-      console.log(error);
     }
   };
 

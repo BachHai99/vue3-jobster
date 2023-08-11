@@ -2,11 +2,12 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import "./index.css";
 import { createPinia } from "pinia";
-import { createWebHistory } from "vue-router";
+// import { createWebHistory } from "vue-router";
 import Unicon from "vue-unicons";
 // import VueI18n from 'vue-i18next'
 import i18n from "@/locale/i18n";
 import Vue3Toastify from "vue3-toastify";
+import 'vue3-toastify/dist/index.css';
 import {
   uniLocationArrow,
   uniCalendarAlt,
@@ -24,10 +25,11 @@ import {
   uniAngleDoubleLeft,
   uniAngleDoubleRight
 } from "vue-unicons/dist/icons";
-import createRouter from "@/router/index.js";
+// import createRouter from "@/router/index.js";
+import router from "@/router/index.js";
 
 const store = createPinia();
-const router = createRouter(createWebHistory());
+// const router = createRouter(createWebHistory());
 Unicon.add([
   uniLocationArrow,
   uniCalendarAlt,
